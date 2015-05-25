@@ -9,7 +9,7 @@ include the hpp file.
 * Class: mtypemap
 * mtypemap functions:
   * `void set<T>(std::string key, T variable)`
-  * `void get<T>(std::string key)`
+  * `T& get<T>(std::string key)`
   * `bool is_set(std::string key)`
   * `void remove(std::string key)`
 
