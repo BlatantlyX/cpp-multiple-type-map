@@ -8,7 +8,7 @@
 		delete (T*)p;
 	}
 
-	class randomDataStore{ //modified unsorted map
+	class mtypemap{ //modified unsorted map
 		private:
 		struct voidndel{//void ptr and delete function
 			void* ptr;
