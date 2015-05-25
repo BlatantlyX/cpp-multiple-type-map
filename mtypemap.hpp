@@ -3,7 +3,7 @@
 
 #include <string>
 #include <unordered_map>
-
+namespace bx{
 	template<class T> void delfunct(void* p){
 		delete (T*)p;
 	}
@@ -56,7 +56,6 @@
 			}
 		}
 	};
-
 }
 
 #endif
