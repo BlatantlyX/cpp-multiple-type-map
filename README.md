@@ -5,13 +5,13 @@ Not complete, but currently usable. Changes are welcome.
 ##### Usage:
 include the hpp file.
 
-Namespace: bx
-Class: mtypemap
-mtypemap functions:
-  `void set<T>(std::string key, T variable)`
-  `void get<T>(std::string key)`
-  `bool is_set(std::string key)`
-  `void remove(std::string key)`
+* Namespace: bx
+* Class: mtypemap
+* mtypemap functions:
+  * `void set<T>(std::string key, T variable)`
+  * `void get<T>(std::string key)`
+  * `bool is_set(std::string key)`
+  * `void remove(std::string key)`
 
 e.g:
 ```c++
