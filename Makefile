@@ -1,3 +1,5 @@
+DELETE = rm
+
 all: testexe
 
 testexe: test.o
@@ -5,3 +7,7 @@ testexe: test.o
 
 test.o: test.cpp mtypemap.hpp
 	$(CXX) -std=c++11 -g -c test.cpp -o test.o
+
+clean:
+	$(DELETE) test.o
+	$(DELETE) testexe
