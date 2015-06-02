@@ -2,14 +2,14 @@
 #include <iostream>
 #include "mtypemap.hpp"
 
-void add_str_2(bx::mtypemap &m){
+void add_str_2(bx::mtypemap<std::string> &m){
 	std::string a;
 	a = "woo!";
 	m.set<std::string>("str2", a);
 }
 
 int main(){
-	bx::mtypemap m;
+	bx::mtypemap<std::string> m;
 
 	m.set<int>("num1", 1);
 	m.set<float>("num2", 2);

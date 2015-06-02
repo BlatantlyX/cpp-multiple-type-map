@@ -1,14 +1,14 @@
 #ifndef MTYPEMAP_HPP
 #define MTYPEMAP_HPP
 
-#include <string>
 #include <unordered_map>
+
 namespace bx{
-	template<class T> void delfunct(void* p){
-		delete (T*)p;
+	template<class VarType> void delfunct(void* p){
+		delete (VarType*)p;
 	}
 
-	class mtypemap{ //modified unsorted map
+	template<class KeyType> class mtypemap{ //modified unsorted map
 		private:
 		struct voidndel{//void ptr and delete function
 			void* ptr;
@@ -19,28 +19,28 @@ namespace bx{
 				del = 0;
 			}
 		};
-		std::unordered_map<std::string, voidndel> data;
+		std::unordered_map<KeyType, voidndel> data;
 
 		public:
 
-		template<class T> void set(std::string key, T variable){ //careful, setting a differet type may be harmful!
+		template<class VarType> void set(KeyType key, VarType variable){ //careful, setting a differet type may be harmful!
 			auto foundIter = data.find(key); //returns data.end() if not found, else returns iterator to element
 			if(foundIter != data.end()){ //variable exists
-				*((T*)data.at(key).ptr) = variable;
+				*((VarType*)data.at(key).ptr) = variable;
 
 			} else {
-				T* stored = new T;
+				VarType* stored = new VarType;
 				*stored = variable;
 				data[key].ptr = (void*) stored;
-				data[key].del = &delfunct<T>;
+				data[key].del = &delfunct<VarType>;
 			}
 		}
 
-		template<class T> T& get(std::string key){
-			return  *(T*)(data.at(key).ptr); //data.at() throws if key doesnt exist
+		template<class VarType> VarType& get(KeyType key){
+			return  *(VarType*)(data.at(key).ptr); //data.at() throws if key doesnt exist
 		}
 
-		bool is_set(std::string key){
+		bool is_set(KeyType key){
 			auto foundIter = data.find(key);
 			if(foundIter != data.end()){
 				return true;
@@ -49,7 +49,7 @@ namespace bx{
 			}
 		}
 
-		void remove(std::string key){
+		void remove(KeyType key){
 			auto foundIter = data.find(key);
 			if(foundIter != data.end()){
 				data.erase(key);
