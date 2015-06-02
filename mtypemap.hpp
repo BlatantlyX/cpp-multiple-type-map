@@ -5,7 +5,7 @@
 
 namespace bx{
 	template<class VarType> void delfunct(void* p){
-		delete (VarType*)p;
+		delete reinterpret_cast<VarType*>(p);
 	}
 
 	template<class KeyType> class mtypemap{ //modified unsorted map
@@ -23,21 +23,21 @@ namespace bx{
 
 		public:
 
-		template<class VarType> void set(KeyType key, VarType variable){ //careful, setting a differet type may be harmful!
+		template<class VarType> void set(KeyType key, VarType variable){
 			auto foundIter = data.find(key); //returns data.end() if not found, else returns iterator to element
 			if(foundIter != data.end()){ //variable exists
-				*((VarType*)data.at(key).ptr) = variable;
+				*reinterpret_cast<VarType*>(data.at(key).ptr) = variable;
 
 			} else {
 				VarType* stored = new VarType;
 				*stored = variable;
-				data[key].ptr = (void*) stored;
+				data[key].ptr = reinterpret_cast<void*>(stored);
 				data[key].del = &delfunct<VarType>;
 			}
 		}
 
 		template<class VarType> VarType& get(KeyType key){
-			return  *(VarType*)(data.at(key).ptr); //data.at() throws if key doesnt exist
+			return  *reinterpret_cast<VarType*>(data.at(key).ptr); //data.at() throws if key doesnt exist
 		}
 
 		bool is_set(KeyType key){
